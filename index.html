@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Jersey Vault: organizza, consulta e valorizza la tua collezione di maglie sportive.">
+    <title>Jersey Vault</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #111815;
+        --muted: #59625d;
+        --paper: #fbfbf7;
+        --soft: #f0f2ea;
+        --line: #dfe4d9;
+        --green: #087d3a;
+        --green-dark: #065f2e;
+        --red: #c42034;
+        --gold: #d9a629;
+        --shadow: 0 24px 70px rgba(17, 24, 21, 0.14);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 15% 10%, rgba(196, 32, 52, 0.09), transparent 28rem),
+          radial-gradient(circle at 85% 5%, rgba(217, 166, 41, 0.12), transparent 24rem),
+          var(--paper);
+        color: var(--ink);
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        width: min(100%, 980px);
+        margin: 0 auto;
+        padding: 22px 20px 54px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        min-height: 56px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-decoration: none;
+      }
+
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: var(--green);
+        color: white;
+        font-size: 18px;
+        font-weight: 900;
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      nav a {
+        text-decoration: none;
+      }
+
+      nav a:hover {
+        color: var(--green);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 390px);
+        gap: 42px;
+        align-items: center;
+        min-height: calc(100vh - 78px);
+        padding: 36px 0 70px;
+      }
+
+      .hero-copy {
+        max-width: 540px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 14px;
+        color: var(--green-dark);
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 28px;
+        height: 3px;
+        border-radius: 999px;
+        background: var(--red);
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 10ch;
+        font-size: clamp(54px, 8vw, 92px);
+        line-height: 0.93;
+        letter-spacing: 0;
+      }
+
+      .intro {
+        max-width: 580px;
+        margin: 24px 0 0;
+        color: var(--muted);
+        font-size: clamp(18px, 2vw, 22px);
+      }
+
+      .store-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .store-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        min-width: 178px;
+        min-height: 56px;
+        padding: 9px 17px;
+        border: 1px solid #171d1a;
+        border-radius: 8px;
+        background: #111815;
+        color: white;
+        text-decoration: none;
+        box-shadow: 0 10px 24px rgba(17, 24, 21, 0.18);
+      }
+
+      .store-button:hover {
+        transform: translateY(-1px);
+        background: #000;
+      }
+
+      .store-icon {
+        width: 25px;
+        height: 25px;
+        flex: 0 0 auto;
+        fill: currentColor;
+      }
+
+      .store-text {
+        display: grid;
+        gap: 0;
+        line-height: 1.05;
+      }
+
+      .store-text small {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.74);
+      }
+
+      .store-text strong {
+        font-size: 18px;
+      }
+
+      .quick-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .quick-links a {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.62);
+        padding: 9px 12px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .quick-links a:hover {
+        border-color: var(--green);
+        color: var(--green);
+      }
+
+      .phone-wrap {
+        position: relative;
+        display: grid;
+        place-items: center;
+        min-height: 590px;
+      }
+
+      .phone-shadow {
+        position: absolute;
+        inset: auto 10% 6% 10%;
+        height: 26%;
+        border-radius: 999px;
+        background: rgba(8, 125, 58, 0.13);
+        filter: blur(28px);
+      }
+
+      .phone {
+        position: relative;
+        z-index: 1;
+        width: min(100%, 360px);
+        max-height: 78vh;
+        object-fit: contain;
+        filter: drop-shadow(var(--shadow));
+      }
+
+      .section {
+        padding: 64px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-grid {
+        display: grid;
+        grid-template-columns: 230px minmax(0, 1fr);
+        gap: 38px;
+        align-items: start;
+      }
+
+      .section-kicker {
+        margin: 0;
+        color: var(--green-dark);
+        font-size: 13px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        margin: 8px 0 0;
+        font-size: clamp(28px, 4vw, 44px);
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        padding: clamp(22px, 4vw, 36px);
+      }
+
+      .panel h3 {
+        margin: 28px 0 8px;
+        font-size: 20px;
+        line-height: 1.25;
+      }
+
+      .panel h3:first-child {
+        margin-top: 0;
+      }
+
+      .panel p,
+      .panel li {
+        color: var(--muted);
+      }
+
+      .panel p {
+        margin: 0 0 14px;
+      }
+
+      .panel ul,
+      .panel ol {
+        margin: 0 0 18px;
+        padding-left: 22px;
+      }
+
+      .contact-line {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 4px;
+        color: var(--green-dark);
+        font-weight: 800;
+        word-break: break-word;
+      }
+
+      .steps {
+        counter-reset: steps;
+        display: grid;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .steps li {
+        counter-increment: steps;
+        position: relative;
+        min-height: 58px;
+        padding: 14px 14px 14px 58px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+      }
+
+      .steps li::before {
+        content: counter(steps);
+        position: absolute;
+        left: 14px;
+        top: 14px;
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--green);
+        color: white;
+        font-weight: 900;
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        padding-top: 30px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      footer a {
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      @media (max-width: 800px) {
+        .page {
+          padding-inline: 18px;
+        }
+
+        .topbar {
+          align-items: flex-start;
+        }
+
+        nav {
+          justify-content: flex-end;
+          flex-wrap: wrap;
+          gap: 10px 14px;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 22px;
+          min-height: auto;
+          padding: 34px 0 52px;
+        }
+
+        h1 {
+          max-width: 8ch;
+          font-size: clamp(54px, 17vw, 76px);
+        }
+
+        .phone-wrap {
+          min-height: 0;
+          padding-top: 10px;
+        }
+
+        .phone {
+          width: min(82vw, 330px);
+          max-height: none;
+        }
+
+        .section-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .topbar {
+          display: grid;
+          gap: 14px;
+        }
+
+        nav {
+          justify-content: flex-start;
+        }
+
+        .store-row,
+        .quick-links {
+          display: grid;
+        }
+
+        .store-button {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .section {
+          padding: 46px 0;
+        }
+
+        footer {
+          display: grid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar" aria-label="Navigazione principale">
+        <a class="brand" href="#top" aria-label="Jersey Vault home">
+          <span class="mark">JV</span>
+          <span>Jersey Vault</span>
+        </a>
+        <nav>
+          <a href="#download">Download</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="delete-data.html">Cancella dati</a>
+        </nav>
+      </header>
+
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow">La tua collezione, sempre con te</p>
+          <h1>Jersey Vault</h1>
+          <p class="intro">
+            Cataloga le tue maglie sportive, organizza i dettagli dei pezzi piu importanti
+            e ritrova ogni jersey in pochi secondi.
+          </p>
+
+          <div class="store-row" id="download" aria-label="Download app">
+            <a class="store-button" href="#" aria-label="Scarica Jersey Vault su Google Play">
+              <svg class="store-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3.6 2.8c-.37.25-.6.7-.6 1.31v15.78c0 .61.23 1.06.6 1.31l9.24-9.2L3.6 2.8Zm10.28 8.16 2.55-2.54L5.88 2.43l8 8.53Zm2.55 4.62-2.55-2.54-8 8.53 10.55-5.99Zm1.2-6.48-2.7 2.9 2.7 2.9 2.94-1.67c1.24-.71 1.24-1.75 0-2.46L17.63 9.1Z"/>
+              </svg>
+              <span class="store-text">
+                <small>Disponibile su</small>
+                <strong>Google Play</strong>
+              </span>
+            </a>
+            <a class="store-button" href="#" aria-label="Scarica Jersey Vault su App Store">
+              <svg class="store-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M16.82 13.06c-.02-2.2 1.8-3.27 1.88-3.32-1.03-1.5-2.63-1.7-3.19-1.72-1.36-.14-2.65.8-3.34.8-.7 0-1.78-.78-2.93-.76-1.51.02-2.9.88-3.68 2.23-1.57 2.73-.4 6.77 1.13 8.98.75 1.08 1.64 2.3 2.81 2.25 1.13-.04 1.56-.73 2.92-.73 1.36 0 1.75.73 2.94.71 1.21-.02 1.98-1.1 2.72-2.19.86-1.25 1.21-2.47 1.23-2.53-.03-.01-2.46-.94-2.49-3.72ZM14.62 6.6c.62-.75 1.04-1.8.92-2.84-.89.04-1.97.59-2.61 1.34-.57.66-1.07 1.73-.94 2.75.99.08 2.01-.5 2.63-1.25Z"/>
+              </svg>
+              <span class="store-text">
+                <small>Scarica su</small>
+                <strong>App Store</strong>
+              </span>
+            </a>
+          </div>
+
+          <div class="quick-links" aria-label="Link utili">
+            <a href="privacy.html">Leggi la privacy policy</a>
+            <a href="delete-data.html">Come cancellare i dati</a>
+          </div>
+        </div>
+
+        <div class="phone-wrap" aria-label="Anteprima app Jersey Vault">
+          <div class="phone-shadow" aria-hidden="true"></div>
+          <img class="phone" src="assets/home-screen.png" alt="Mockup Android della homepage di Jersey Vault">
+        </div>
+      </section>
+
+      <section class="section" id="privacy">
+        <div class="section-grid">
+          <div>
+            <p class="section-kicker">Privacy Policy</p>
+            <h2>Come gestiamo i dati</h2>
+          </div>
+          <article class="panel">
+            <h3>Titolare del trattamento</h3>
+            <p>
+              Jersey Vault e gestita dallo sviluppatore dell'app. Per domande sulla privacy
+              puoi scrivere a:
+            </p>
+            <a class="contact-line" href="mailto:lucaantonelli1999@gmail.com">lucaantonelli1999@gmail.com</a>
+
+            <h3>Dati raccolti</h3>
+            <p>
+              L'app puo trattare le informazioni che inserisci volontariamente per creare e
+              organizzare la tua collezione, come nome della maglia, squadra, stagione, numero,
+              giocatore, note e immagini associate.
+            </p>
+            <p>
+              Se abilitate dalle funzionalita dell'app, possono essere trattati anche dati tecnici
+              necessari al funzionamento del servizio, alla sicurezza e al miglioramento
+              dell'esperienza.
+            </p>
+
+            <h3>Finalita</h3>
+            <ul>
+              <li>Mostrare, salvare e organizzare la tua collezione di jersey.</li>
+              <li>Consentire il backup, il ripristino o la sincronizzazione dei dati, se disponibili.</li>
+              <li>Rispondere a richieste di supporto e gestire eventuali problemi tecnici.</li>
+            </ul>
+
+            <h3>Conservazione</h3>
+            <p>
+              I dati vengono conservati per il tempo necessario a fornire le funzionalita dell'app
+              o fino a quando richiedi la cancellazione secondo la procedura indicata in questa pagina.
+            </p>
+
+            <h3>Condivisione</h3>
+            <p>
+              Non vendiamo i tuoi dati personali. I dati possono essere condivisi solo con fornitori
+              tecnici necessari al funzionamento dell'app o quando richiesto dalla legge.
+            </p>
+
+            <h3>Diritti dell'utente</h3>
+            <p>
+              Puoi richiedere accesso, modifica, esportazione o cancellazione dei tuoi dati
+              scrivendo all'indirizzo email indicato sopra.
+            </p>
+
+            <h3>Aggiornamenti</h3>
+            <p>
+              Questa policy puo essere aggiornata in futuro. Le modifiche saranno pubblicate su
+              questa pagina con una versione aggiornata del testo.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="delete-data">
+        <div class="section-grid">
+          <div>
+            <p class="section-kicker">Cancellazione dati</p>
+            <h2>Richiedi la rimozione</h2>
+          </div>
+          <article class="panel">
+            <h3>Come cancellare i dati associati all'app</h3>
+            <p>
+              Per richiedere la cancellazione dei dati personali collegati a Jersey Vault,
+              segui questi passaggi:
+            </p>
+            <ol class="steps">
+              <li>Invia un'email a <a href="mailto:lucaantonelli1999@gmail.com">lucaantonelli1999@gmail.com</a> usando l'indirizzo collegato al tuo account, se presente.</li>
+              <li>Inserisci nell'oggetto: "Richiesta cancellazione dati Jersey Vault".</li>
+              <li>Specifica se vuoi cancellare solo alcuni contenuti della collezione o tutti i dati associati all'app.</li>
+            </ol>
+            <p>
+              La richiesta verra gestita entro un tempo ragionevole e, dove necessario, potremmo
+              chiederti informazioni aggiuntive per verificare che la richiesta provenga dal titolare
+              dei dati.
+            </p>
+
+            <h3>Dati eliminati</h3>
+            <p>
+              La cancellazione puo includere dati del profilo, elementi della collezione, immagini,
+              note e altri contenuti salvati tramite l'app. Alcune informazioni tecniche minime
+              potrebbero essere conservate per obblighi di legge, sicurezza o prevenzione abusi.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <footer>
+        <span>&copy; 2026 Jersey Vault. Tutti i diritti riservati.</span>
+        <span><a href="#top">Torna su</a></span>
+      </footer>
+    </main>
+  </body>
+</html>

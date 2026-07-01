@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="How to delete data associated with Jersey Vault.">
+    <title>Data Deletion | Jersey Vault</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #111815;
+        --muted: #59625d;
+        --paper: #fbfbf7;
+        --line: #dfe4d9;
+        --green: #087d3a;
+        --green-dark: #065f2e;
+        --red: #c42034;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 15% 10%, rgba(196, 32, 52, 0.08), transparent 28rem),
+          radial-gradient(circle at 85% 5%, rgba(217, 166, 41, 0.12), transparent 24rem),
+          var(--paper);
+        color: var(--ink);
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        width: min(100%, 900px);
+        margin: 0 auto;
+        padding: 22px 20px 54px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        min-height: 56px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: var(--green);
+        color: white;
+        font-size: 18px;
+        font-weight: 900;
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      nav a {
+        text-decoration: none;
+      }
+
+      nav a:hover {
+        color: var(--green);
+      }
+
+      .hero {
+        padding: 58px 0 34px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 14px;
+        color: var(--green-dark);
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 28px;
+        height: 3px;
+        border-radius: 999px;
+        background: var(--red);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(44px, 8vw, 78px);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .intro {
+        max-width: 660px;
+        margin: 20px 0 0;
+        color: var(--muted);
+        font-size: clamp(17px, 2vw, 21px);
+      }
+
+      .panel {
+        margin-top: 28px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.76);
+        padding: clamp(22px, 4vw, 38px);
+      }
+
+      .panel h2 {
+        margin: 32px 0 8px;
+        font-size: 24px;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      .panel h2:first-child {
+        margin-top: 0;
+      }
+
+      .panel p,
+      .panel li {
+        color: var(--muted);
+      }
+
+      .panel p {
+        margin: 0 0 14px;
+      }
+
+      .steps {
+        counter-reset: steps;
+        display: grid;
+        gap: 12px;
+        margin: 0 0 18px;
+        padding: 0;
+        list-style: none;
+      }
+
+      .steps li {
+        counter-increment: steps;
+        position: relative;
+        min-height: 58px;
+        padding: 14px 14px 14px 58px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+      }
+
+      .steps li::before {
+        content: counter(steps);
+        position: absolute;
+        left: 14px;
+        top: 14px;
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--green);
+        color: white;
+        font-weight: 900;
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        margin-top: 48px;
+        padding-top: 30px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      footer a {
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      @media (max-width: 620px) {
+        .topbar,
+        footer {
+          display: grid;
+        }
+
+        nav {
+          flex-wrap: wrap;
+          gap: 10px 14px;
+        }
+
+        .hero {
+          padding-top: 42px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar" aria-label="Navigazione principale">
+        <a class="brand" href="index.html" aria-label="Jersey Vault home">
+          <span class="mark">JV</span>
+          <span>Jersey Vault</span>
+        </a>
+        <nav>
+          <a href="index.html#download">Download</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="delete-data.html">Cancella dati</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <p class="eyebrow">Data deletion</p>
+        <h1>Delete your data</h1>
+        <p class="intro">
+          Jersey Vault does not create proprietary user accounts and does not operate
+          backend servers for user-created collection data.
+        </p>
+      </section>
+
+      <article class="panel">
+        <h2>How to delete data associated with the App</h2>
+        <p>
+          Users may delete their information at any time directly from their own device.
+        </p>
+        <ol class="steps">
+          <li>Delete individual jerseys, collections or wishlist items inside Jersey Vault.</li>
+          <li>Clear the App data from the device settings to remove locally stored data.</li>
+          <li>Uninstall the App to remove the local app data from the device.</li>
+          <li>If you used Google Drive backup, delete the backup from your own Google Drive AppData storage.</li>
+        </ol>
+        <p>
+          Because the developer does not maintain proprietary user accounts or backend copies
+          of user-created collection data, deletion requests do not require contacting the developer.
+        </p>
+
+        <h2>Data that can be deleted</h2>
+        <p>
+          Deletion may include jersey catalog data, collections, statistics, wishlist items,
+          app preferences, attached photos, processed images and custom notes stored locally
+          or in optional user-created Google Drive backups.
+        </p>
+
+        <h2>Privacy contact</h2>
+        <p>
+          For questions about this data deletion page or the Privacy Policy, contact:
+        </p>
+        <p><a href="mailto:lucaantonelli1999@gmail.com">lucaantonelli1999@gmail.com</a></p>
+      </article>
+
+      <footer>
+        <span>&copy; 2026 Jersey Vault. Tutti i diritti riservati.</span>
+        <span><a href="index.html">Torna alla landing</a></span>
+      </footer>
+    </main>
+  </body>
+</html>
