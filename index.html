@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Jersey Vault: organizza, consulta e valorizza la tua collezione di maglie sportive.">
+    <link rel="icon" href="assets/icon.png">
     <title>Jersey Vault</title>
     <style>
       :root {
@@ -44,9 +45,12 @@
       }
 
       .page {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
         width: min(100%, 980px);
         margin: 0 auto;
-        padding: 22px 20px 54px;
+        padding: 18px 20px 22px;
       }
 
       .topbar {
@@ -54,28 +58,25 @@
         align-items: center;
         justify-content: space-between;
         gap: 18px;
-        min-height: 56px;
+        min-height: 68px;
       }
 
       .brand {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
-        font-weight: 800;
+        gap: 13px;
+        font-size: 20px;
+        font-weight: 900;
         letter-spacing: 0;
         text-decoration: none;
       }
 
       .mark {
-        display: grid;
-        place-items: center;
-        width: 34px;
-        height: 34px;
-        border-radius: 8px;
-        background: var(--green);
-        color: white;
-        font-size: 18px;
-        font-weight: 900;
+        width: 46px;
+        height: 46px;
+        border-radius: 10px;
+        object-fit: cover;
+        box-shadow: 0 8px 18px rgba(17, 24, 21, 0.14);
       }
 
       nav {
@@ -96,12 +97,13 @@
       }
 
       .hero {
+        flex: 1;
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(260px, 390px);
-        gap: 42px;
+        grid-template-columns: minmax(0, 1fr) minmax(340px, 430px);
+        gap: 24px;
         align-items: center;
-        min-height: calc(100vh - 78px);
-        padding: 36px 0 70px;
+        min-height: 0;
+        padding: 16px 0 22px;
       }
 
       .hero-copy {
@@ -130,23 +132,23 @@
       h1 {
         margin: 0;
         max-width: 10ch;
-        font-size: clamp(54px, 8vw, 92px);
+        font-size: clamp(62px, 8.4vw, 98px);
         line-height: 0.93;
         letter-spacing: 0;
       }
 
       .intro {
         max-width: 580px;
-        margin: 24px 0 0;
+        margin: 20px 0 0;
         color: var(--muted);
-        font-size: clamp(18px, 2vw, 22px);
+        font-size: clamp(17px, 1.8vw, 20px);
       }
 
       .store-row {
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
-        margin-top: 32px;
+        margin-top: 26px;
       }
 
       .store-button {
@@ -191,162 +193,30 @@
         font-size: 18px;
       }
 
-      .quick-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 24px;
-      }
-
-      .quick-links a {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.62);
-        padding: 9px 12px;
-        color: var(--muted);
-        font-size: 14px;
-        font-weight: 700;
-        text-decoration: none;
-      }
-
-      .quick-links a:hover {
-        border-color: var(--green);
-        color: var(--green);
-      }
-
       .phone-wrap {
         position: relative;
         display: grid;
         place-items: center;
-        min-height: 590px;
-      }
-
-      .phone-shadow {
-        position: absolute;
-        inset: auto 10% 6% 10%;
-        height: 26%;
-        border-radius: 999px;
-        background: rgba(8, 125, 58, 0.13);
-        filter: blur(28px);
+        min-height: 0;
+        padding: 34px 58px 58px;
+        overflow: visible;
       }
 
       .phone {
+        box-sizing: content-box;
         position: relative;
         z-index: 1;
-        width: min(100%, 360px);
-        max-height: 78vh;
+        width: min(100%, 342px);
+        max-height: min(68vh, 550px);
+        padding: 18px 28px 34px;
         object-fit: contain;
-        filter: drop-shadow(var(--shadow));
-      }
-
-      .section {
-        padding: 64px 0;
-        border-top: 1px solid var(--line);
-      }
-
-      .section-grid {
-        display: grid;
-        grid-template-columns: 230px minmax(0, 1fr);
-        gap: 38px;
-        align-items: start;
-      }
-
-      .section-kicker {
-        margin: 0;
-        color: var(--green-dark);
-        font-size: 13px;
-        font-weight: 900;
-        text-transform: uppercase;
-      }
-
-      h2 {
-        margin: 8px 0 0;
-        font-size: clamp(28px, 4vw, 44px);
-        line-height: 1.05;
-        letter-spacing: 0;
-      }
-
-      .panel {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.72);
-        padding: clamp(22px, 4vw, 36px);
-      }
-
-      .panel h3 {
-        margin: 28px 0 8px;
-        font-size: 20px;
-        line-height: 1.25;
-      }
-
-      .panel h3:first-child {
-        margin-top: 0;
-      }
-
-      .panel p,
-      .panel li {
-        color: var(--muted);
-      }
-
-      .panel p {
-        margin: 0 0 14px;
-      }
-
-      .panel ul,
-      .panel ol {
-        margin: 0 0 18px;
-        padding-left: 22px;
-      }
-
-      .contact-line {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        margin-top: 4px;
-        color: var(--green-dark);
-        font-weight: 800;
-        word-break: break-word;
-      }
-
-      .steps {
-        counter-reset: steps;
-        display: grid;
-        gap: 12px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      .steps li {
-        counter-increment: steps;
-        position: relative;
-        min-height: 58px;
-        padding: 14px 14px 14px 58px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: white;
-      }
-
-      .steps li::before {
-        content: counter(steps);
-        position: absolute;
-        left: 14px;
-        top: 14px;
-        display: grid;
-        place-items: center;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: var(--green);
-        color: white;
-        font-weight: 900;
       }
 
       footer {
         display: flex;
         justify-content: space-between;
         gap: 18px;
-        padding-top: 30px;
+        padding-top: 16px;
         border-top: 1px solid var(--line);
         color: var(--muted);
         font-size: 14px;
@@ -386,7 +256,7 @@
 
         .phone-wrap {
           min-height: 0;
-          padding-top: 10px;
+          padding: 10px 18px 24px;
         }
 
         .phone {
@@ -394,10 +264,6 @@
           max-height: none;
         }
 
-        .section-grid {
-          grid-template-columns: 1fr;
-          gap: 20px;
-        }
       }
 
       @media (max-width: 520px) {
@@ -410,18 +276,13 @@
           justify-content: flex-start;
         }
 
-        .store-row,
-        .quick-links {
+        .store-row {
           display: grid;
         }
 
         .store-button {
           width: 100%;
           justify-content: center;
-        }
-
-        .section {
-          padding: 46px 0;
         }
 
         footer {
@@ -434,11 +295,10 @@
     <main class="page">
       <header class="topbar" aria-label="Navigazione principale">
         <a class="brand" href="#top" aria-label="Jersey Vault home">
-          <span class="mark">JV</span>
+          <img class="mark" src="assets/icon.png" alt="" aria-hidden="true">
           <span>Jersey Vault</span>
         </a>
         <nav>
-          <a href="#download">Download</a>
           <a href="privacy.html">Privacy</a>
           <a href="delete-data.html">Cancella dati</a>
         </nav>
@@ -473,109 +333,10 @@
               </span>
             </a>
           </div>
-
-          <div class="quick-links" aria-label="Link utili">
-            <a href="privacy.html">Leggi la privacy policy</a>
-            <a href="delete-data.html">Come cancellare i dati</a>
-          </div>
         </div>
 
         <div class="phone-wrap" aria-label="Anteprima app Jersey Vault">
-          <div class="phone-shadow" aria-hidden="true"></div>
           <img class="phone" src="assets/home-screen.png" alt="Mockup Android della homepage di Jersey Vault">
-        </div>
-      </section>
-
-      <section class="section" id="privacy">
-        <div class="section-grid">
-          <div>
-            <p class="section-kicker">Privacy Policy</p>
-            <h2>Come gestiamo i dati</h2>
-          </div>
-          <article class="panel">
-            <h3>Titolare del trattamento</h3>
-            <p>
-              Jersey Vault e gestita dallo sviluppatore dell'app. Per domande sulla privacy
-              puoi scrivere a:
-            </p>
-            <a class="contact-line" href="mailto:lucaantonelli1999@gmail.com">lucaantonelli1999@gmail.com</a>
-
-            <h3>Dati raccolti</h3>
-            <p>
-              L'app puo trattare le informazioni che inserisci volontariamente per creare e
-              organizzare la tua collezione, come nome della maglia, squadra, stagione, numero,
-              giocatore, note e immagini associate.
-            </p>
-            <p>
-              Se abilitate dalle funzionalita dell'app, possono essere trattati anche dati tecnici
-              necessari al funzionamento del servizio, alla sicurezza e al miglioramento
-              dell'esperienza.
-            </p>
-
-            <h3>Finalita</h3>
-            <ul>
-              <li>Mostrare, salvare e organizzare la tua collezione di jersey.</li>
-              <li>Consentire il backup, il ripristino o la sincronizzazione dei dati, se disponibili.</li>
-              <li>Rispondere a richieste di supporto e gestire eventuali problemi tecnici.</li>
-            </ul>
-
-            <h3>Conservazione</h3>
-            <p>
-              I dati vengono conservati per il tempo necessario a fornire le funzionalita dell'app
-              o fino a quando richiedi la cancellazione secondo la procedura indicata in questa pagina.
-            </p>
-
-            <h3>Condivisione</h3>
-            <p>
-              Non vendiamo i tuoi dati personali. I dati possono essere condivisi solo con fornitori
-              tecnici necessari al funzionamento dell'app o quando richiesto dalla legge.
-            </p>
-
-            <h3>Diritti dell'utente</h3>
-            <p>
-              Puoi richiedere accesso, modifica, esportazione o cancellazione dei tuoi dati
-              scrivendo all'indirizzo email indicato sopra.
-            </p>
-
-            <h3>Aggiornamenti</h3>
-            <p>
-              Questa policy puo essere aggiornata in futuro. Le modifiche saranno pubblicate su
-              questa pagina con una versione aggiornata del testo.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="delete-data">
-        <div class="section-grid">
-          <div>
-            <p class="section-kicker">Cancellazione dati</p>
-            <h2>Richiedi la rimozione</h2>
-          </div>
-          <article class="panel">
-            <h3>Come cancellare i dati associati all'app</h3>
-            <p>
-              Per richiedere la cancellazione dei dati personali collegati a Jersey Vault,
-              segui questi passaggi:
-            </p>
-            <ol class="steps">
-              <li>Invia un'email a <a href="mailto:lucaantonelli1999@gmail.com">lucaantonelli1999@gmail.com</a> usando l'indirizzo collegato al tuo account, se presente.</li>
-              <li>Inserisci nell'oggetto: "Richiesta cancellazione dati Jersey Vault".</li>
-              <li>Specifica se vuoi cancellare solo alcuni contenuti della collezione o tutti i dati associati all'app.</li>
-            </ol>
-            <p>
-              La richiesta verra gestita entro un tempo ragionevole e, dove necessario, potremmo
-              chiederti informazioni aggiuntive per verificare che la richiesta provenga dal titolare
-              dei dati.
-            </p>
-
-            <h3>Dati eliminati</h3>
-            <p>
-              La cancellazione puo includere dati del profilo, elementi della collezione, immagini,
-              note e altri contenuti salvati tramite l'app. Alcune informazioni tecniche minime
-              potrebbero essere conservate per obblighi di legge, sicurezza o prevenzione abusi.
-            </p>
-          </article>
         </div>
       </section>
 
