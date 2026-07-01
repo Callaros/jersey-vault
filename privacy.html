@@ -311,7 +311,8 @@
           <li>users authenticate using their own Google account;</li>
           <li>backups are stored only in the application's private AppData folder;</li>
           <li>the App cannot access other files stored in Google Drive;</li>
-          <li>backups are created only when initiated by the user.</li>
+          <li>backups are created only when initiated by the user;</li>
+          <li>AppData backups are not normally visible as regular files in the user's Google Drive.</li>
         </ul>
         <p>The App requests only the permissions required for backup and restore functionality.</p>
 
@@ -374,7 +375,11 @@
           <li>application data is cleared;</li>
           <li>the application is uninstalled.</li>
         </ul>
-        <p>Google Drive backups remain stored until deleted by the user.</p>
+        <p>
+          Google Drive AppData backups remain stored until the user removes Jersey Vault's
+          hidden app data from Google Drive settings. Removing the Google account connection
+          only disconnects account access and does not delete the hidden Drive app data by itself.
+        </p>
         <p>The developer does not retain copies of user backups.</p>
 
         <h2>15. Data Deletion</h2>
@@ -383,7 +388,16 @@
           <li>deleting jerseys inside the App;</li>
           <li>clearing application data;</li>
           <li>uninstalling the App;</li>
-          <li>deleting backups stored in their own Google Drive.</li>
+          <li>
+            deleting Jersey Vault's hidden app data from Google Drive settings at
+            <a href="https://drive.google.com/drive/u/0/settings">https://drive.google.com/drive/u/0/settings</a>
+            by finding Jersey Vault and using the option to delete hidden app data.
+          </li>
+          <li>
+            optionally removing Jersey Vault from Google account connections at
+            <a href="https://myaccount.google.com/connections">https://myaccount.google.com/connections</a>
+            to disconnect account access.
+          </li>
         </ul>
         <p>
           Because the developer does not operate backend servers for Jersey Vault, deletion
